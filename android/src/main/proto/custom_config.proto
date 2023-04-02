@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+enum CustomConfigStatus {
+    ConfigSuccess = 0;
+    ConfigFail = 1;
+}
+
+message CloudID {
+    string thing_name = 1;
+    string endpoint_url = 2;
+}
+
+message CertChunk {
+    string chunk = 1;
+}
+
+message KeyChunk {
+    string chunk = 1;
+}
+
+message CustomConfigRequest {
+    oneof cloud_oneof  {
+        CloudID cloud_id = 1;
+        CertChunk cert_chunk = 2;
+        KeyChunk key_chunk = 3;
+    }
+}
+
+message CustomConfigResponse {
+    CustomConfigStatus status = 1;
+    int32 thing_name_length = 2;
+    int32 endpoint_url_length = 3;
+    int32 cert_length = 4;
+    int32 key_length = 5;
+}
